@@ -1,0 +1,265 @@
+{% if data|length > 0 %}
+<html !DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    <head>
+        <title>Download invoice</title>
+        <meta charset="UTF-8">
+        <meta name='robots' content='noindex,nofollow,noarchive' />
+        <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+        <style type="text/css">
+            body { font-family: sans-serif; color: #333; background-color: #fff; }
+            table { font-size: 90% }
+            h2, h3, h4 { margin: 0; }
+            .invoice { width: 95%; margin: 30px auto; }
+            .invoice td { vertical-align: top; }
+            .invoice td h2 { margin-bottom: 2px; font-size: 16px; color: #aaa; }
+            .invoice-title { text-align: center; }
+            .invoice-title h4 { line-height: 1.4; }
+            .invoice-title small { font-weight: normal; }
+            .datatable { width: 100%; border-spacing: 1px; padding: 1px; margin: 2px 0; border: 1px solid #b7b3b1; }
+            .datatable th { font-weight: bold; background-color: #e3e2d7; border: 1px solid #dcdcdc; padding: 3px 5px; }
+            .datatable td { padding: 3px 5px; border: 1px solid #dcdcdc; }
+            #invoice-total { padding: 2px 20px; text-align: right; }
+            #invoice-total h3 { margin: 0px; font-size: 15px; }
+            .data-container ul { margin: 0; padding: 0; font-size: 12px; color: #000; list-style: none; }
+            .data-container ul li .label { width: 85px; margin: 0; font-weight: 800; }
+        </style>
+    </head>
+    <body>
+        <table class="invoice" cellspacing="0" cellpadding="0" border="0">
+            <tr>
+                <td style="width: 30%"><h2>Furnizor</h2></td>
+                <td style="width: 40%">&nbsp;</td>
+                <td style="width: 30%"><h2>Beneficiar</h2></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="data-container">
+                        <ul>
+                            <li>
+                                <h3>{{ data.provider.provider_name }}</h3>
+                            </li>
+                            <li>
+                                <span class="data-label">O.R.C.:</span>
+                                <span class="data-field">{{ data.provider.provider_orc }}</span>
+                            </li>
+                            <li>
+                                <span class="data-label">C.I.F.:</span>
+                                <span class="data-field">{{ data.provider.provider_cui }}</span>
+                            </li>
+                            <li>
+                                <span class="data-label">Capital Social:</span>
+                                <span class="data-field">200</span>
+                            </li>
+                            <li>
+                                <span class="data-label">Sediu:</span>
+                                <span class="data-field">{{ data.provider.provider_address }}</span>
+                            </li>
+                            <li>
+                                <span class="data-label">Cont:</span>
+                                <span class="data-field">{{ data.provider.provider_account }}</span>
+                            </li>
+                            <li>
+                                <span class="data-label">Banca:</span>
+                                <span class="data-field">{{ data.provider.provider_bank }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+                <td>&nbsp;</td>
+                <td>
+                    <div class="data-container">
+                        <ul>
+                            <li>
+                                <h3>{{ data.client.client_name }}</h3>
+                                {{ data.client.client_address }}
+                            </li>
+                            <li>
+                                <span class="data-label">O.R.C.:</span>
+                                <span class="data-field">{{ data.client.client_orc }}</span>
+                            </li>
+                            <li>
+                                <span class="data-label">C.I.F.:</span>
+                                <span class="data-field">{{ data.client.client_cui }}</span>
+                            </li>
+                            <li>
+                                <span class="data-label">Cont:</span>
+                                <span class="data-field">{{ data.client.client_account }}</span>
+                            </li>
+                            <li>
+                                <span class="data-label">Banca:</span>
+                                <span class="data-field">{{ data.client.client_bank }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="invoice-title">
+                        <h2>FACTURA nr. {{ data.invoice.invoice_no }}</h2>
+                        <h4>
+                            <small>din data (z-l-a):</small><br/>
+                            {{ data.invoice.invoice_date }}
+                        </h4>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <small>Cota T.V.A. 0%</small>
+                    <div id="invoice-lines">
+                        <table class="datatable" border="1">
+                            <tr>
+                                <th width="5%">Nr. Crt.</th>
+                                <th width="35%">Denumirea Serviciilor</th>
+                                <th>UM</th>
+                                <th width="15%">Cantitate</th>
+                                <th width="15%">Preţ Unitar</th>
+                                <th width="20%">Valoarea (Lei)</th>
+                            </tr>
+                            <tr style="text-align: center;">
+                                <td>0</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5 (3x4)</td>
+                            </tr>
+                            {% for line in data.invoice_lines %}
+                                <tr style="text-align: center;">
+                                    <td>{{ forloop.counter }}</td>
+                                    <td style="text-align: left;">
+                                        {{ line.service_name }} conf. contract nr. {{ data.invoice.contract_id.contract_no }} din
+                                        data de {{ data.invoice.contract_id.contract_date|date:"d M Y" }}
+                                    </td>
+                                    <td> - </td>
+                                    <td>{{ line.qty }}</td>
+                                    <td>{{ line.price|floatformat:2 }}</td>
+                                    <td>{{ line.value|floatformat:2 }}</td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="6">
+                                    <div id="invoice-total">
+                                        <h3>Total de plată: {{ data.total_value|floatformat:2 }} Lei</h3>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <table class="datatable" style="margin-top: 10px;">
+                    	<tbody><tr>
+                    		<td valign="top" width="20%" rowspan="5"><strong>Semnatura și ștampila furnizorului</strong></td>
+                    		<td colspan="2"><strong>Date privind expediția</strong></td>
+                    		<td valign="top" width="20%" rowspan="5"><strong>Semnătura de primire</strong></td>
+                    	</tr>
+                    	<tr>
+                    		<td width="20%"><strong>Numele delegatului:</strong></td>
+                    		<td><div class="rep_name">Boară Remus Florian</div></td>
+                    	</tr>
+                    	<tr>
+                    		<td><strong>C.I.:</strong></td>
+                    		<td>KX 775486</td>
+                    	</tr>
+                    	<tr>
+                    		<td><strong>Data</strong></td>
+                    		<td><div class="rep_date">{{ data.invoice.invoice_date }}</div></td>
+                    	</tr>
+                    </tbody></table>
+                </td>
+            </tr>
+        </table>
+        {% if data.receipt|length > 0 %}
+            <table class="invoice datatable" cellspacing="0" cellpadding="0" border="0" style="width: 95%; margin: 0px auto;">
+                <tr>
+                    <td style="width: 50%; vertical-align: middle;">
+                        <div class="invoice-title">
+                            <h2>Chitanța nr. {{ data.receipt.receipt_no }}</h2>
+                            <h4>
+                                <small>din data (z-l-a):</small><br/>
+                                {{ data.receipt.receipt_date }}
+                            </h4>
+                        </div>
+                    </td>
+                    <td style="width: 50%">
+                        <div class="data-container" style="padding: 10px 0;">
+                            <ul>
+                                <li>
+                                    <h3>{{ data.provider.provider_name }}</h3>
+                                </li>
+                                <li>
+                                    <span class="data-label">O.R.C.:</span>
+                                    <span class="data-field">{{ data.provider.provider_orc }}</span>
+                                </li>
+                                <li>
+                                    <span class="data-label">C.I.F.:</span>
+                                    <span class="data-field">{{ data.provider.provider_cui }}</span>
+                                </li>
+                                <li>
+                                    <span class="data-label">Capital Social:</span>
+                                    <span class="data-field">200</span>
+                                </li>
+                                <li>
+                                    <span class="data-label">Sediu:</span>
+                                    <span class="data-field">{{ data.provider.provider_address }}</span>
+                                </li>
+                                <li>
+                                    <span class="data-label">Cont:</span>
+                                    <span class="data-field">{{ data.provider.provider_account }}</span>
+                                </li>
+                                <li>
+                                    <span class="data-label">Banca:</span>
+                                    <span class="data-field">{{ data.provider.provider_bank }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h2>Am primit de la</h2>
+                        <div class="data-container" style="padding: 10px 0;">
+                            <ul>
+                                <li>
+                                    <h3>{{ data.client.client_name }}</h3>
+                                    {{ data.client.client_address }}
+                                </li>
+                                <li>
+                                    <span class="data-label">O.R.C.:</span>
+                                    <span class="data-field">{{ data.client.client_orc }}</span>
+                                </li>
+                                <li>
+                                    <span class="data-label">C.I.F.:</span>
+                                    <span class="data-field">{{ data.client.client_cui }}</span>
+                                </li>
+                                <li>
+                                    <span class="data-label">Cont:</span>
+                                    <span class="data-field">{{ data.client.client_account }}</span>
+                                </li>
+                                <li>
+                                    <span class="data-label">Banca:</span>
+                                    <span class="data-field">{{ data.client.client_bank }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                    <td style="vertical-align: middle;">
+                        <p><strong>Suma de {{ data.receipt.receipt_amount }} Lei</strong></p>
+                        <p><strong>Adica {{ data.receipt.receipt_amount_str }} Lei</strong></p>
+                        <p>Reprezentand contravaloarea facturii nr. {{ data.invoice.invoice_no }} din {{ data.invoice.invoice_date|date:"d M Y" }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p id="cashier" style="padding: 15px 50px; text-align: right;">Casier,</p>
+                    </td>
+                </tr>
+            </table>
+        {% endif %}
+    </body>
+</html>
+{% endif %}

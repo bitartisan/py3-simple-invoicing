@@ -1,0 +1,97 @@
+<div id="receipt" class="row">
+    <div class="col">
+        <table id="table-receipt" class="table table-bordered"> 
+            <tr>
+                <td style="width: 50%">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>
+                                Chitanța nr.
+                            </h1>
+                        </div>
+                        <div class="col-md-4 offset-md-2">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label for="receipt_no" class="input-group-text">Chitanța</label>
+                                </div>
+                                {{ receipt_form.receipt_no }}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div id="datepicker-container-1" class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label for="receipt_date" class="input-group-text">din data</label>
+                                </div>
+                                {{ receipt_form.receipt_date }}
+                            </div>
+                        </div>
+                    </div>
+                </td> 
+                <td style="width: 50%">
+                    <button type="button" id="delete_receipt" class="btn btn-sm btn-danger float-right">
+                        <span class="fas fa-trash"></span>
+                    </button>
+                    <ul class="data-list">
+                        {% for provider in return_data.provider %}
+                            <li>
+                                <strong>{{ provider.provider_name }}</strong>
+                            </li>
+                            <li>
+                                <label>O.R.C.:</label>
+                                <span>{{ provider.provider_orc }}</span>
+                            </li>
+                            <li>
+                                <label>C.I.F.:</label>
+                                <span>{{ provider.provider_cui }}</span>
+                            </li>
+                            <li>
+                                <label>Capital Social:</label>
+                                <span>200 Lei</span>
+                            </li>
+                            <li>
+                                <label>Adresa:</label>
+                                <span>{{ provider.provider_address }}</span>
+                            </li>
+                            <li>
+                                <label>Banca:</label>
+                                <span>{{ provider.provider_bank }}</span>
+                            </li>
+                            <li>
+                                <label>Cont:</label>
+                                <span>{{ provider.provider_account }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td> 
+            </tr>
+            <tr>
+                <td>
+                    <h2>Am primit de la</h2>
+                    <div id="receipt-client"></div>
+                </td>
+                <td>
+                    <div class="form-group row">
+                        <label for="receipt_amount" class="col-md-2 col-form-label">Suma</label>
+                        <div class="col-sm-8">
+                            {{ receipt_form.receipt_amount }}
+                        </div>
+                        <span class="col-md-1 col-form-label">Lei</span>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label">Adica</label>
+                        <div class="col-sm-8">
+                            {{ receipt_form.receipt_amount_str }}
+                        </div>
+                        <span class="col-md-1 col-form-label">Lei</span>
+                    </div>
+                    <p>Reprezentand contravaloarea facturii nr. <span id="receipt-invoice-no"></span> din <span id="receipt-invoice-date"></span></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p id="cashier">Casier,</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

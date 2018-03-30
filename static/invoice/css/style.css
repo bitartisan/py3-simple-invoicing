@@ -1,0 +1,252 @@
+/* fonts */
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/roboto/Roboto-Bold-webfont.woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/roboto/Roboto-Regular-webfont.woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/roboto/Roboto-Light-webfont.woff');
+    font-weight: 300;
+    font-style: normal;
+}
+/*******************************************************/
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+}
+
+.navbar-right li a {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #fff !important;
+}
+
+.navbar-right li a:hover {
+    color: #77a6be !important;
+}
+
+.navbar-right li .dropdown-item {
+    color: #333 !important;
+}
+
+#client-info {
+    min-height: 115px;
+}
+
+#search {
+    height: 19px;
+    padding: 12px 5px;
+    font-size: 0.8rem;
+    border-radius: 5px;
+}
+
+#metainfo {
+    float: right;
+    margin-right: 10px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+#notification {
+    visibility: hidden;
+    position: fixed;
+    right: 10px;
+    top: 75px;
+    z-index: 9999;
+    transition: visibility 0s, opacity 0.5s linear;
+    opacity: 0;
+}
+
+#notification.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+main {
+    margin: 80px 0;
+}
+
+.container-fixed {
+    width: 94%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar {
+    background-color: #417690 !important;
+    border-bottom: 5px solid #79aec8;
+}
+
+.navbar-brand {
+    padding: 4px 24px;
+    font-weight: 300;
+    font-size: 1.50rem;
+    color: #f5dd5d !important;
+}
+
+h1 {
+    margin: 0 0 20px;
+    font-weight: 300;
+    font-size: 20px;
+    color: #666;
+    line-height: 1.6;
+}
+
+h1 small {
+    display: block;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+h2 {
+    margin: 0 0 5px;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #417690;
+}
+
+ul.data-list {
+    margin: 0;
+    padding: 5px 0;
+    font-size: 0.8rem;
+    color: #000;
+    list-style: none;
+}
+
+ul.data-list li label {
+    width: 85px;
+    margin: 0;
+    font-weight: 800;
+}
+
+#render-client-info li:first-child {
+    padding: 2px 0 5px;
+}
+
+.datepicker {
+    font-size: 0.9rem;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background-color: #f5f5f5;
+}
+
+.footer span {
+    font-size: 0.8rem;
+}
+
+/*
+Invoice
+*/
+#form-invoice,
+#form-receipt {
+    width: 100%;
+}
+    
+#total {
+    margin-right: 20px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/*
+Receipt
+*/
+#receipt_id,
+#receipt-add,
+#receipt {
+    display: none;
+}
+
+#cashier {
+    text-align: right;
+    padding: 5px 80px;
+}
+
+#delete_receipt {
+    margin: 0 13px;
+    display: none;
+}
+
+/* search */
+#search-result {
+    display: none;
+    position: absolute;
+    top: 80%;
+    left: 10%;
+    width: 80%;
+    height: 250px;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+#search-result ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#search-result ul li {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #ccc;
+}
+
+#search-result ul li:last-child {
+    border-bottom: none;
+}
+
+#search-result ul li h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #417690;
+}
+
+#search-result .search-row a {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+#search-result .search-row a:hover {
+    text-decoration: none;
+}
+
+#search-result .search-row a span {
+    display: block;
+    font-size: 0.8rem;
+    color: #000;
+}
+
+
+/* custom bootstrap styles */
+#invoice-form .input-group-text {
+    color: #417690;
+    background-color: #fff;
+}

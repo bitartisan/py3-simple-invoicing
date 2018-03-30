@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Invoicing{% endblock %}
+{% block lastinvoice %}{{ return_data.last_invoice }}{% endblock %}
+
+{% block content %}
+
+<form id="form-invoice" name="form-invoice" method="POST" action="">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Furnizor</h2>
+            {{ invoice_form.invoice_id }}
+            {{ invoice_form.provider_id }}
+            <ul class="data-list" id="provider">
+                {% for provider in return_data.provider %}
+                    <li>
+                        <label>Nume:</label>
+                        <span>{{ provider.provider_name }}</span>
+                    </li>
+                    <li>
+                        <label>O.R.C.:</label>
+                        <span>{{ provider.provider_orc }}</span>
+                    </li>
+                    <li>
+                        <label>C.I.F.:</label>
+                        <span>{{ provider.provider_cui }}</span>
+                    </li>
+                    <li>
+                        <label>Capital Social:</label>
+                        <span>200 Lei</span>
+                    </li>
+                    <li>
+                        <label>Adresa:</label>
+                        <span>{{ provider.provider_address }}</span>
+                    </li>
+                    <li>
+                        <label>Banca:</label>
+                        <span>{{ provider.provider_bank }}</span>
+                    </li>
+                    <li>
+                        <label>Cont:</label>
+                        <span>{{ provider.provider_account }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h2>&nbsp;</h2>
+            <div class="form-group">
+                <a id="receipt-add" href="javascript:;" class="btn btn-sm btn-info">
+                    <span class="fas fa-plus"></span> Chitanța
+                </a>
+                {{ receipt_form.receipt_id }}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h2>Beneficiar</h2>
+            <div class="form-group">
+                {{ invoice_form.client_id }}
+                <div id="client-info"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 offset-md-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label for="invoice_no" class="input-group-text">Factura</label>
+                </div>
+                {{ invoice_form.invoice_no }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div id="datepicker-container-0" class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label for="invoice_date" class="input-group-text">din data</label>
+                </div>
+                {{ invoice_form.invoice_date }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label for="contract_id" class="input-group-text">Contract #</label>
+                </div>
+                {{ invoice_form.contract_id }}
+            </div>
+        </div>
+    </div>
+    <!-- Invoice block -->
+    {% include "invoice.html" %}
+</form>
+{% endblock %}

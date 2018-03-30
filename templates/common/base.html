@@ -1,0 +1,80 @@
+{% load static %}<!DOCTYPE html>
+<html lang="ro-ro">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name='robots' content='noindex,nofollow,noarchive' />
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+        <link rel="stylesheet" href="{% static "invoice/fonts/fontawesome/css/fontawesome-all.min.css" %}" />
+        <link rel="stylesheet" href="{% static "invoice/css/bootstrap.min.css" %}" />
+        <link rel="stylesheet" href="{% static "invoice/css/bootstrap-datepicker.min.css" %}" />
+        <link rel="stylesheet" href="{% static "invoice/css/style.css" %}" />
+    </head>
+    <body>
+        <header>
+            <!-- Fixed navbar -->
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <a class="navbar-brand" href="/">Invoicing</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"></li>
+                    </ul>
+                    <form id="form-search" name="form-search" class="form-inline mt-2 mt-md-0">
+                        <input id="search" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                        <div id="search-result"></div>
+                    </form>
+                    <ul class="navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                 <a href="javascript:;" class="nav-link disabled">Last invoice: <strong id="last-invoice">{% block lastinvoice %}{% endblock %}</strong></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown" aria-haspopup="true"  aria-expanded="false">Documente</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown">
+                              <a class="dropdown-item" href="#">Contract</a>
+                              <a class="dropdown-item" href="#">Deviz</a>
+                              <a class="dropdown-item" href="#">Jurnal</a>
+                            </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/">Admin</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/logout/?next=/admin/login/">Log-Out</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin/login/?next=/">Log-In</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        
+        <!-- Begin page content -->
+        <main role="main" class="container-fixed">
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="footer">
+            <div class="container-fixed">
+                <span class="text-muted">Copyright 2018 Boara Remus Florian PFA.</span>
+            </div>
+        </footer>
+        {% include "notification.html" %}
+        {% include "modal.html" %}
+        <script src="{% static "invoice/js/jquery-3.2.1.min.js" %}"></script>
+        <script src="{% static "invoice/js/popper.min.js" %}"></script>
+        <script src="{% static "invoice/js/bootstrap.min.js" %}"></script>
+        <script src="{% static "invoice/js/bootstrap-datepicker.min.js" %}"></script>
+        <script src="{% static "invoice/js/locales/bootstrap-datepicker.ro.min.js" %}" charset="UTF-8"></script>
+        <script src="{% static "invoice/js/inv.js" %}"></script>
+        <script src="{% static "invoice/js/func.js" %}"></script>
+        <script src="{% static "invoice/js/number-2-word.js" %}"></script>
+    </body>
+</html>

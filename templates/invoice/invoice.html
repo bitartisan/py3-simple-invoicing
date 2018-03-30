@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col">
+        <small>Neplatitor de TVA</small>
+        <table id="table-invoice" class="table table-bordered table-responsive"> 
+            <thead> 
+                <tr> 
+                    <th width="5%">Nr. Crt.</th> 
+                    <th width="35%">Denumirea Serviciilor</th> 
+                    <th width="10%">UM</th> 
+                    <th width="15%">Cantitate</th>
+                    <th width="15%">Preţ Unitar</th>
+                    <th width="20%">Valoarea (Lei)</th>
+                    <th rowspan="2"></th>
+                </tr> 
+                <tr>
+                    <th scope="row">0</th> 
+                    <td>1</td> 
+                    <td>2</td> 
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5 (3x4)</td>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="7">
+                        <div id="total">
+                            Total: <span id="grand-total"> - </span>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+            <tbody class="invoice-body">
+                <tr>
+                    <th scope="row">1</th> 
+                    <td>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ invoice_form.service_id__0 }}
+                            </div>
+                            <div class="col-md-6">
+                                conf. ctr. <span class="contract"> - </span>
+                            </div>
+                        </div>
+                    </td>
+                    <td> - </td>
+                    <td>
+                        <div class="col">
+                            {{ invoice_form.qty__0 }}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col">
+                            {{ invoice_form.price__0 }}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col">
+                            {{ invoice_form.total__0 }}
+                        </div>
+                    </td>
+                    <td>
+                        <button type="button" data-lineaction="add" class="line-action btn btn-sm btn-success">
+                            <span class="fas fa-plus"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% include "receipt.html" %}
+
+<div class="row">
+    <div class="col-md-2 offset-md-10">
+        <button type="button" id="save_invoice" class="btn btn-sm btn-success">
+            <span class="fas fa-save"></span> Save
+        </button>
+        <a href="/download/" target="_blank" id="download_invoice" class="btn btn-sm btn-info">
+            <span class="fas fa-download"></span> Download
+        </a>
+        <button type="button" id="delete_invoice" class="btn btn-sm btn-danger">
+            <span class="fas fa-trash"></span> Delete
+        </button>
+    </div>
+</div>
